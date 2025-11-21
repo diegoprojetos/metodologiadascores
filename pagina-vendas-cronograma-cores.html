@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma das Cores - Emagreça 5-12kg em 30 Dias</title>
+    <meta name="description" content="Método japonês comprovado que já ajudou +4.700 mulheres a emagrecer comendo de tudo. Faça o quiz gratuito!">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icon-sit.svg">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00B074;      /* Verde saúde - confiança e vitalidade */
+            --secondary: #52C7A4;     /* Verde água - frescor e equilíbrio */
+            --accent: #FF6B9D;        /* Rosa suave - feminilidade e cuidado */
+            --dark: #2D3E50;          /* Azul escuro - seriedade e confiança */
+            --light: #F7FFFE;         /* Branco esverdeado - limpeza e pureza */
+            --warning: #FFA154;       /* Laranja suave - energia positiva */
+            --success: #00B074;       /* Verde sucesso */
+            --trust: #4A90E2;         /* Azul confiança */
+            --gradient: linear-gradient(135deg, #00B074 0%, #52C7A4 100%);
+            --gradient-alt: linear-gradient(135deg, #4A90E2 0%, #00B074 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Barra de Urgência Superior */
+        .urgency-bar {
+            background: linear-gradient(90deg, #00B074, #52C7A4);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+            box-shadow: 0 2px 10px rgba(0, 176, 116, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .urgency-bar i {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px 20px;
+        }
+
+        /* Headline */
+        .headline {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .headline h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .headline .subheadline {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .headline .warning-text {
+            background: #E8F8F5;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: var(--dark);
+        }
+
+        /* Badges de Confiança */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .badge i {
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        /* Container do Vídeo */
+        .video-container {
+            position: relative;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin: 40px 0;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-alt);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .play-button i {
+            color: var(--primary);
+            font-size: 40px;
+            margin-left: 5px;
+        }
+
+        .video-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Contador de Pessoas Assistindo */
+        .watching-now {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 3px 15px rgba(0, 176, 116, 0.2);
+        }
+
+        .watching-now i {
+            animation: pulse 1s infinite;
+        }
+
+        .watching-count {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* Seção de Benefícios */
+        .benefits {
+            background: linear-gradient(135deg, #F7FFFE 0%, #E8F8F5 100%);
+            padding: 60px 20px;
+            margin: 40px -20px;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .benefit-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            padding: 60px 0;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 80px;
+            color: var(--secondary);
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info strong {
+            display: block;
+            color: var(--dark);
+        }
+
+        .author-info span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: #FFD700;
+            margin-top: 5px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: #F8F9FA;
+            padding: 60px 20px;
+            margin: 40px -20px;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #F8F9FA;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        /* CTA Principal */
+        .main-cta {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--gradient);
+            margin: 40px -20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .main-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .main-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: white;
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 176, 116, 0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 176, 116, 0.4);
+            border: 2px solid var(--primary);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .guarantee i {
+            color: #FFD700;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--dark);
+            color: white;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 999;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Popup de Saída */
+        .exit-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exit-popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .exit-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .exit-popup h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .exit-popup p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .exit-popup .cta-button {
+            background: var(--gradient);
+            color: white;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .headline h1 {
+                font-size: 1.8rem;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 1.1rem;
+            }
+
+            .main-cta h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification Toast */
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        .notification img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .notification strong {
+            display: block;
+            color: var(--dark);
+        }
+
+        .notification span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Scarcity Counter */
+        .scarcity {
+            background: linear-gradient(135deg, #E8F8F5 0%, #D5F4E6 100%);
+            border: 2px solid var(--primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 176, 116, 0.1);
+        }
+
+        .scarcity h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .countdown-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .countdown-item small {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .sei-la-mano {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Barra de Urgência -->
+    <div class="urgency-bar">
+        <i class="fas fa-exclamation-triangle"></i>
+        ATENÇÃO: Vagas limitadas! Apenas <span id="spots-left">11</span> disponíveis 
+        <i class="fas fa-exclamation-triangle"></i>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="container">
+        <!-- Headline -->
+        <div class="headline">
+            <h1>Método Japonês Revela Como Emagrecer 5-12kg em 30 Dias Comendo de TUDO</h1>
+            <p class="subheadline">Descoberta de 1943 já ajudou +4.700 mulheres brasileiras a recuperar o corpo dos sonhos</p>
+            <div class="warning-text">
+                <i class="fas fa-exclamation-circle"></i>
+                <strong>AVISO:</strong> Este site pode sair do ar a qualquer momento devido a pressão da indústria fitness
+            </div>
+        </div>
+
+        <!-- Badges de Confiança -->
+        <div class="trust-badges">
+            <div class="badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>100% Seguro</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-check-circle"></i>
+                <span>Garantia 7 Dias</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-users"></i>
+                <span>+4.700 Alunas</span>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo -->
+        <!--<div class="video-container">
+            <div class="video-wrapper">
+                <div class="video-placeholder" id="video-placeholder">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="video-text">
+                        Clique para Assistir a Apresentação Completa
+                    </div>
+                </div>
+                 Aqui seria inserido o iframe do vídeo quando clicar
+            </div>
+        </div>-->
+
+        <div class="texto-principal">
+            <h3 class="main-text">
+                <p>
+                    Durante a Segunda Guerra Mundial, médicos japoneses em Okinawa perceberam algo curioso...
+                Mesmo com racionamento de comida, algumas mulheres EMAGRECIAM enquanto outras engordavam.
+                </p>
+                <p>
+                    A diferença?                    
+                </p>
+                <p>
+                    As que emagreciam seguiam inconscientemente um padrão de cores na alimentação.
+                Eles documentaram isso e criaram o 'Nanairo Shokuji' - A Dieta das 7 Cores.
+                Mas esse conhecimento ficou ESCONDIDO por décadas...    
+                </p>
+                <p>
+                    Até que pesquisadores da Universidade de Kyoto, em 2019, comprovaram:
+                Alternar as cores dos alimentos durante a semana ativa TODOS os receptores metabólicos.
+                </p>  
+                <p class="sei-la-mano"><span>É literalmente como dar um 'reset' no seu metabolismo a cada 24 horas!</span></p>
+            </h3>
+        </div>
+
+        <!-- Contador de Pessoas Assistindo -->
+        <div class="watching-now">
+            <i class="fas fa-eye"></i>
+            <span><span class="watching-count" id="watching-count">247</span> pessoas fazendo o quiz agora</span>
+        </div>
+
+        <!-- Scarcity Counter -->
+        <div class="scarcity">
+            <h3>⏰ OFERTA ESPECIAL TERMINA EM:</h3>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span id="hours">14</span>
+                    <small>Horas</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">32</span>
+                    <small>Minutos</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">19</span>
+                    <small>Segundos</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Benefícios -->
+        <div class="benefits">
+            <h2>O Que Você Vai Descobrir</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Metabolismo 3x Mais Rápido</h3>
+                    <p>Ative os 7 receptores metabólicos do seu corpo simultaneamente</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Coma de TUDO</h3>
+                    <p>Pizza, chocolate, pão... Tudo liberado no dia certo!</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Resultados em 7 Dias</h3>
+                    <p>Perca até 2kg na primeira semana seguindo o cronograma</p>
+                </div>
+                <!--<div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Suporte VIP WhatsApp</h3>
+                    <p>Grupo exclusivo com acompanhamento diário</p>
+                </div>-->
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Sem Academia</h3>
+                    <p>Exercícios opcionais de apenas 15 minutos em casa</p>
+                </div>
+                <!--<div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>+10 Receitas Bônus</h3>
+                    <p>Receitas fit deliciosas para acelerar resultados</p>
+                </div>-->
+            </div>
+        </div>
+
+        <!-- Depoimentos -->
+        <div class="testimonials">
+            <h2>Veja Quem Já Transformou o Corpo</h2>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Eu não acreditava que poderia emagrecer comendo pizza aos domingos! Perdi 9kg no primeiro mês e meu marido não para de me elogiar. Estou me sentindo com 20 anos de novo!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MP</div>
+                    <div class="author-info">
+                        <strong>Maria Paula, 42 anos</strong>
+                        <span>São Paulo - SP</span>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "23kg em 4 meses! Voltei a usar roupas que não cabiam há 10 anos. O melhor é que não passo fome e ainda como chocolate. Minha diabetes tipo 2 reverteu completamente."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <strong>Ana Silva, 45 anos</strong>
+                        <span>Rio de Janeiro - RJ</span>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Sempre desistia das dietas na segunda semana. Com o Cronograma das Cores é diferente! Cada dia uma cor nova, não enjoa. Perdi 14kg em 2 meses e estou mantendo!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">PC</div>
+                    <div class="author-info">
+                        <strong>Patricia Costa, 38 anos</strong>
+                        <span>Belo Horizonte - MG</span>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq">
+            <h2>Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Preciso cortar algum alimento?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Não! O Cronograma das Cores permite que você coma de TUDO. A única regra é seguir a cor do dia. Pizza, chocolate, pão, massa... tudo liberado no momento certo!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Quanto tempo leva para ver resultados?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>A maioria das alunas perde entre 1-2kg na primeira semana. Em 30 dias, a média é de 5-8kg. Algumas alunas mais dedicadas chegam a perder 12kg no primeiro mês.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Preciso fazer exercícios?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Não é obrigatório! O método funciona apenas com a alimentação. Mas incluímos um protocolo opcional de 15 minutos para quem quer acelerar os resultados.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Funciona para quem tem mais de 40 anos?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Sim! Na verdade, funciona MELHOR após os 35 anos. O método foi desenvolvido especificamente para reativar o metabolismo que desacelera com a idade.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>E se eu não gostar ou não funcionar?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Você tem 7 dias de garantia incondicional. Se não gostar por qualquer motivo, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Principal -->
+        <div class="main-cta">
+            <h2>Está Pronta Para Transformar Seu Corpo?</h2>
+            <p>Descubra em 2 minutos se você se qualifica para o método</p>
+            <a href="#" class="cta-button" id="quiz-button">
+                FAZER QUIZ GRATUITO AGORA
+                <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+            </a>
+            <div class="guarantee">
+                <i class="fas fa-lock"></i>
+                <span>Compra 100% Segura | Garantia de 7 Dias</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Cronograma das Cores. Todos os direitos reservados.</p>
+        <p>
+            <a href="#">Termos de Uso</a> | 
+            <a href="#">Política de Privacidade</a> | 
+            <a href="#">Contato</a>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
+            Este produto não substitui o parecer médico profissional. Sempre consulte um médico para tratar de assuntos relativos à saúde.
+        </p>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Exit Intent Popup -->
+    <div class="exit-popup" id="exitPopup">
+        <div class="exit-popup-content">
+            <span class="exit-popup-close" onclick="closeExitPopup()">&times;</span>
+            <h3>ESPERE! 😱</h3>
+            <p><strong>Você está prestes a perder a chance de emagrecer até 12kg em 30 dias!</strong></p>
+            <p>Faça o quiz GRATUITO de 2 minutos e descubra se você se qualifica para o método.</p>
+            <a href="#" class="cta-button" onclick="goToQuiz()">
+                SIM, QUERO FAZER O QUIZ!
+            </a>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="notification" id="notification">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23667eea'/%3E%3C/svg%3E" alt="Avatar">
+        <div>
+            <strong id="notification-name">Ana de São Paulo</strong>
+            <span id="notification-text">acabou de garantir sua vaga!</span>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let videoWatched = false;
+        let exitIntentShown = false;
+        const QUIZ_URL = 'http://127.0.0.1:5500/quiz-cronograma-cores.html'; // Substitua pela URL real do quiz
+
+        // Contador de vagas
+        function updateSpots() {
+            const spots = document.getElementById('spots-left');
+            let current = parseInt(spots.textContent);
+            if (current > 5) {
+                setInterval(() => {
+                    if (current > 5) {
+                        current--;
+                        spots.textContent = current;
+                    }
+                }, 45000); // Diminui uma vaga a cada 45 segundos
+            }
+        }
+
+        // Contador de pessoas assistindo
+        function updateWatching() {
+            const watching = document.getElementById('watching-count');
+            setInterval(() => {
+                let count = parseInt(watching.textContent);
+                let change = Math.floor(Math.random() * 7) - 3; // -3 a +3
+                count = Math.max(180, Math.min(350, count + change));
+                watching.textContent = count;
+            }, 3000);
+        }
+
+        // Countdown Timer
+        function startCountdown() {
+            let hours = 14;
+            let minutes = 32;
+            let seconds = 19;
+
+            setInterval(() => {
+                if (seconds > 0) {
+                    seconds--;
+                } else {
+                    seconds = 59;
+                    if (minutes > 0) {
+                        minutes--;
+                    } else {
+                        minutes = 59;
+                        if (hours > 0) {
+                            hours--;
+                        }
+                    }
+                }
+
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }, 1000);
+        }
+
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Notifications
+        const names = [
+            'Maria de Campinas',
+            'Ana de São Paulo', 
+            'Patricia do Rio',
+            'Juliana de BH',
+            'Sandra de Curitiba',
+            'Fernanda de Porto Alegre'
+        ];
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            document.getElementById('notification-name').textContent = randomName;
+            
+            notification.style.display = 'flex';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+
+        // Mostra notificações aleatoriamente
+        setInterval(showNotification, 30000);
+        setTimeout(showNotification, 5000); // Primeira notificação após 5 segundos
+
+        // Exit Intent
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY <= 0 && !exitIntentShown) {
+                document.getElementById('exitPopup').style.display = 'flex';
+                exitIntentShown = true;
+            }
+        });
+
+        function closeExitPopup() {
+            document.getElementById('exitPopup').style.display = 'none';
+        }
+
+        // Funções de redirecionamento
+        function goToQuiz() {
+            window.location.href = QUIZ_URL;
+        }
+
+        function openWhatsApp() {
+            window.open('https://wa.me/5511954644010?text=Olá! Vi o vídeo do Cronograma das Cores e tenho uma dúvida...', '_blank');
+        }
+
+        // Event listeners para botões do quiz
+        document.querySelectorAll('#quiz-button, .cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.id === 'quiz-button' || this.textContent.includes('QUIZ')) {
+                    e.preventDefault();
+                    goToQuiz();
+                }
+            });
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSpots();
+            updateWatching();
+            startCountdown();
+        });
+
+        // Previne saída acidental
+        window.addEventListener('beforeunload', function (e) {
+            if (!videoWatched) {
+                e.preventDefault();
+                e.returnValue = 'Tem certeza que deseja sair? Você ainda não assistiu à apresentação completa!';
+            }
+        });
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Facebook Pixel (exemplo)
+        // Adicione seu pixel real aqui
+        console.log('Facebook Pixel seria carregado aqui');
+
+        // Google Analytics (exemplo)  
+        // Adicione seu GA real aqui
+        console.log('Google Analytics seria carregado aqui');
+    </script>
+</body>
+</html>
