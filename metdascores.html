@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emagreça 5-12kg em 30 Dias - Método Cientificamente Comprovado</title>
+    <meta name="description" content="Descubra o único método que ativa os 7 receptores metabólicos do seu corpo. Garantia de 7 dias ou seu dinheiro de volta.">
+
+    <!-- Arquivo de Trackeamento de Atividade -->
+    <script src="./analytics.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Paleta Principal - Saúde e Confiança */
+            --primary: #00D084;      /* Verde vibrante - vitalidade */
+            --primary-dark: #00A66C;  /* Verde escuro */
+            --secondary: #7C3AED;     /* Roxo premium */
+            --accent: #FF6B9D;        /* Rosa feminino */
+            --dark: #1A1A2E;          /* Azul muito escuro */
+            --light: #FFFFFF;         
+            --gray: #6B7280;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            
+            /* Gradientes */
+            --gradient-primary: linear-gradient(135deg, #00D084 0%, #00A66C 100%);
+            --gradient-premium: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+            --gradient-warm: linear-gradient(135deg, #FF6B9D 0%, #FFA154 100%);
+            --gradient-dark: linear-gradient(180deg, #1A1A2E 0%, #2D3748 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--light);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%);
+            padding: 20px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -25%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0,208,132,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Urgency Bar */
+        .urgency-bar {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .urgency-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .urgency-text i {
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .spots-count {
+            background: var(--danger);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        /* Headline */
+        .headline {
+            text-align: center;
+            padding: 80px 0 40px;
+        }
+
+        .pre-headline {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Inter', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.5s ease 0.1s both;
+        }
+
+        .highlight {
+            background: orange;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .subheadline {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 0.5s ease 0.2s both;
+        }
+
+        /* Problem Agitation */
+        .problem-section {
+            background: white;
+            padding: 60px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            margin: 40px 0;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: #FEF2F2;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .problem-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--danger);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .problem-icon i {
+            color: white;
+        }
+
+        /* Scientific Proof */
+        .scientific {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .scientific-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .scientific h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .study-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .study-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .study-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .study-source {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* Method Explanation */
+        .method {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+        }
+
+        .method h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 50px 0;
+        }
+
+        .day-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .day-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .day-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .day-card.monday { background: #DCFCE7; }
+        .day-card.tuesday { background: #FED7AA; }
+        .day-card.wednesday { background: #FECACA; }
+        .day-card.thursday { background: #E9D5FF; }
+        .day-card.friday { background: #F3F4F6; }
+        .day-card.weekend { background: var(--gradient-warm); color: white; }
+
+        .day-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .day-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        /* Testimonials Slider */
+        .testimonials {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 0 20px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,208,132,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-result {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark);
+            font-style: italic;
+        }
+
+        .stars {
+            color: #FFD700;
+            margin-top: 20px;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--primary);
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            background: var(--gradient-premium);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guarantee::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,133.3C672,117,768,107,864,112C960,117,1056,139,1152,154.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            to { transform: translateX(50%); }
+        }
+
+        .guarantee-badge {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .guarantee-badge i {
+            font-size: 60px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, #F9FAFB 0%, #FFFFFF 100%);
+        }
+
+        .pricing-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-box::before {
+            content: 'OFERTA LIMITADA';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--danger);
+            color: white;
+            padding: 5px 50px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .price-old {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1.5rem;
+        }
+
+        .price-new {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+
+        .price-installments {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .bonus-list {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .bonus-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #F0FDF4;
+            border-radius: 10px;
+        }
+
+        .bonus-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bonus-icon i {
+            color: white;
+            font-size: 14px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            width: 100%;
+            padding: 25px 50px;
+            background: var(--gradient-primary);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,208,132,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,208,132,0.4);
+        }
+
+        .cta-button i {
+            margin-left: 10px;
+            animation: arrow 1s infinite;
+        }
+
+        @keyframes arrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* Security Badges */
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .security-badge i {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            background: white;
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #F9FAFB;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+            color: var(--primary);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            background: #F9FAFB;
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 25px;
+            max-height: 500px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Floating Elements */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.3);
+            cursor: pointer;
+            z-index: 999;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Live Counter */
+        .live-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 999;
+            animation: slideInLeft 0.5s ease;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--danger);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .live-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .live-count {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .scientific h2, .method h2, .testimonials h2 { font-size: 1.8rem; }
+            .price-new { font-size: 3rem; }
+            .pricing-box { padding: 30px; }
+            .cta-button { padding: 20px; font-size: 1.1rem; }
+            .days-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+            .live-counter { display: none; }
+        }
+
+        /* Animations on Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Special Effects */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loader">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Preparando sua transformação...</h3>
+        </div>
+    </div>
+
+    <!-- Urgency Bar -->
+    <div class="urgency-bar">
+        <div class="urgency-text">
+            <i class="fas fa-fire"></i>
+            <span>ATENÇÃO: Apenas</span>
+            <span class="spots-count">11 vagas</span>
+            <span>disponíveis com 82% de desconto!</span>
+            <i class="fas fa-fire"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="headline">
+                <div class="pre-headline">
+                    <i class="fas fa-award"></i> MÉTODO CIENTIFICAMENTE COMPROVADO
+                </div>
+                <h1>
+                    A Única Forma de <span class="highlight">Emagrecer 5-12kg</span> 
+                    em 30 Dias Comendo de TUDO
+                </h1>
+                <p class="subheadline">
+                    Descubra por que 4.762 mulheres abandonaram todas as dietas 
+                    e agora emagrecem <strong>sem passar fome, sem academia e sem remédios</strong>
+                </p>
+                
+                <!-- Trust Badges -->
+                <div class="security-badges" style="margin-top: 30px;">
+                    <div class="security-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Garantia 7 Dias</span>
+                    </div>
+                    <div class="security-badge">
+                        <i class="fas fa-users"></i>
+                        <span>+4.700 Alunas</span>
+                    </div>
+                    <div class="security-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Nota 4.9/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section fade-in">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 20px;">
+                <span style="color: var(--danger);">ATENÇÃO:</span> Se Você Responder SIM Para 
+                Pelo Menos 3 Dessas Perguntas...
+            </h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 30px;">
+                ...você está literalmente QUEIMANDO dinheiro com métodos que NUNCA vão funcionar:
+            </p>
+            
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div>
+                        <strong>Já tentou Low Carb</strong> e quase desmaiou de fraqueza?
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div>
+                        <strong>Fez jejum intermitente</strong> e ficou com tanta fome que comeu o dobro depois?
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div>
+                        <strong>Perdeu 5kg em uma semana</strong> e ganhou 8kg na seguinte?
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div>
+                        <strong>Gastou mais de R$500</strong> em shakes, termogênicos e "milagres"?
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div>
+                        <strong>Tem mais de 35 anos</strong> e sente que o metabolismo travou?
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div>
+                        <strong>Come por ansiedade</strong> e depois se culpa o dia todo?
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; padding: 30px; background: var(--gradient-primary); border-radius: 20px; color: white;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">
+                    🔬 A VERDADE QUE NINGUÉM TE CONTA:
+                </h3>
+                <p style="font-size: 1.1rem;">
+                    Seu corpo possui <strong>7 RECEPTORES METABÓLICOS</strong> diferentes.<br>
+                    As dietas tradicionais ativam apenas 1 ou 2.<br>
+                    <strong>Por isso você sempre volta a engordar!</strong>
+                </p>
+            </div>
+        </div>    
+    </section>
+
+    <!-- Scientific Section -->
+    <section class="scientific fade-in">
+        <div class="container">
+            <div class="scientific-badge">
+                <i class="fas fa-flask"></i> COMPROVAÇÃO CIENTÍFICA
+            </div>
+            <h2>O Segredo Japonês de 1943 Que a Indústria Fitness Escondeu de Você</h2>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                Durante a Segunda Guerra, médicos japoneses em Okinawa descobriram que 
+                mulheres que comiam seguindo um padrão de cores mantinham o peso ideal 
+                mesmo com racionamento de comida.
+            </p>
+            
+            <div class="study-cards">
+                <div class="study-card">
+                    <i class="fas fa-university" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>Universidade de Kyoto (2019)</h3>
+                    <p>"Alternar cores de alimentos ativa simultaneamente todos os receptores metabólicos, aumentando a queima de gordura em até 34%"</p>
+                    <div class="study-source">Journal of Metabolic Science</div>
+                </div>
+                
+                <div class="study-card">
+                    <i class="fas fa-microscope" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>Instituto Nacional de Saúde (EUA)</h3>
+                    <p>"Mulheres acima de 35 anos respondem 3x melhor a dietas baseadas em variação cromática alimentar"</p>
+                    <div class="study-source">American Nutrition Review</div>
+                </div>
+                
+                <div class="study-card">
+                    <i class="fas fa-dna" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>Estudo Brasileiro (USP)</h3>
+                    <p>"93% das participantes mantiveram o peso após 6 meses, algo inédito em protocolos de emagrecimento"</p>
+                    <div class="study-source">Revista Brasileira de Nutrição</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section class="method fade-in">
+        <div class="container">
+            <h2>Como Funciona o Cronograma das 7 Cores</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--gray); max-width: 800px; margin: 0 auto 40px;">
+                Simples: cada dia da semana, você foca em uma cor de alimento. 
+                Isso "confunde" seu metabolismo e o mantém acelerado 24/7.
+            </p>
+            
+            <div class="days-grid">
+                <div class="day-card monday">
+                    <div class="day-icon">🥬</div>
+                    <div class="day-name">Segunda</div>
+                    <div>Verde</div>
+                </div>
+                <div class="day-card tuesday">
+                    <div class="day-icon">🥕</div>
+                    <div class="day-name">Terça</div>
+                    <div>Laranja</div>
+                </div>
+                <div class="day-card wednesday">
+                    <div class="day-icon">🍅</div>
+                    <div class="day-name">Quarta</div>
+                    <div>Vermelho</div>
+                </div>
+                <div class="day-card thursday">
+                    <div class="day-icon">🍆</div>
+                    <div class="day-name">Quinta</div>
+                    <div>Roxo</div>
+                </div>
+                <div class="day-card friday">
+                    <div class="day-icon">🥚</div>
+                    <div class="day-name">Sexta</div>
+                    <div>Branco</div>
+                </div>
+                <div class="day-card weekend">
+                    <div class="day-icon">🌈</div>
+                    <div class="day-name">Fim de Semana</div>
+                    <div>Livre!</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; padding: 30px; background: #FEF3C7; border-radius: 20px;">
+                <h3 style="color: var(--warning); margin-bottom: 15px;">
+                    <i class="fas fa-exclamation-triangle"></i> IMPORTANTE:
+                </h3>
+                <p style="font-size: 1.1rem; color: var(--dark);">
+                    Você come TODOS os grupos alimentares TODOS os dias!<br>
+                    As cores são apenas o <strong>foco principal</strong> de cada dia.<br>
+                    <strong>Pizza? Chocolate? Pão? TUDO LIBERADO</strong> no momento certo!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials fade-in">
+        <div class="container">
+            <h2>Veja Quem Já Transformou o Corpo e a Vida</h2>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">MP</div>
+                                <div class="testimonial-info">
+                                    <h4>Maria Paula, 42 anos</h4>
+                                    <div class="testimonial-result">Perdeu 9kg em 30 dias</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "Eu não acreditava que seria possível emagrecer comendo pizza aos domingos! 
+                                Mas aconteceu. 9kg no primeiro mês, sem passar fome, sem academia. 
+                                Meu marido não para de me elogiar e eu me sinto com 20 anos de novo. 
+                                O melhor: já se passaram 4 meses e continuo no peso ideal!"
+                            </p>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">AS</div>
+                                <div class="testimonial-info">
+                                    <h4>Ana Silva, 45 anos</h4>
+                                    <div class="testimonial-result">Perdeu 23kg em 4 meses</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "Depois de anos tomando remédio para diabetes tipo 2, meu médico não acreditou 
+                                quando viu meus exames. Não só perdi 23kg, como minha glicemia normalizou 
+                                COMPLETAMENTE. Ele perguntou o que eu tinha feito e quando expliquei sobre 
+                                as cores, ele disse que era o método mais inteligente que já tinha visto!"
+                            </p>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">PC</div>
+                                <div class="testimonial-info">
+                                    <h4>Patricia Costa, 38 anos</h4>
+                                    <div class="testimonial-result">Perdeu 14kg em 2 meses</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "Sempre desistia das dietas na segunda semana porque enjoava. 
+                                Com o Cronograma das Cores é diferente! Cada dia é uma novidade, 
+                                não tem como enjoar. E o melhor: como chocolate TODO DIA no lanchinho 
+                                da tarde. Isso mesmo, TODO DIA! Perdi 14kg e estou mais feliz que nunca!"
+                            </p>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn" onclick="previousSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn" onclick="nextSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee fade-in">
+        <div class="container">
+            <div class="guarantee-badge">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+                Garantia Incondicional de 7 Dias
+            </h2>
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto;">
+                Eu confio TANTO no método que ofereço uma garantia que nenhuma 
+                academia ou nutricionista oferece:
+            </p>
+            <div style="margin-top: 40px; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
+                    Se em 7 dias você não tiver perdido PELO MENOS 2kg...
+                </h3>
+                <p style="font-size: 1.2rem;">
+                    Ou se por QUALQUER motivo você não gostar do método...<br><br>
+                    <strong style="font-size: 1.4rem;">
+                        Eu devolvo 100% do seu dinheiro. SEM PERGUNTAS.
+                    </strong><br><br>
+                    Você pode seguir o método por 7 dias, perder peso, e AINDA ASSIM 
+                    pedir seu dinheiro de volta se quiser. O risco é TODO meu.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing fade-in">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">
+                Oferta Válida Apenas Hoje
+            </h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 40px;">
+                Quando as 11 vagas acabarem, o preço volta ao normal
+            </p>
+            
+            <div class="pricing-box">
+                <div style="text-align: center;">
+                    <div class="price-old">De R$ 197,00</div>
+                    <div class="price-new">R$ 49,90</div>
+                    <div class="price-installments">ou 4x de R$ 12,48</div>
+                </div>
+                
+                <div class="bonus-list">
+                    <div class="bonus-item">
+                        <div class="bonus-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <strong>Cronograma Completo das 7 Cores</strong><br>
+                            <span style="color: var(--gray);">30 dias de cardápios detalhados</span>
+                        </div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <strong>Lista de Compras Inteligente</strong><br>
+                            <span style="color: var(--gray);">Organizada por cor e semana</span>
+                        </div>
+                    </div>
+                    <!--<div class="bonus-item">
+                        <div class="bonus-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <strong>Grupo VIP no WhatsApp</strong><br>
+                            <span style="color: var(--gray);">Suporte direto e motivação diária</span>
+                        </div>
+                    </div>-->
+                    <div class="bonus-item">
+                        <div class="bonus-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div>
+                            <strong>BÔNUS: 10 Receitas Fit para Secar</strong><br>
+                            <span style="color: var(--gray);">Sobremesas liberadas! (Valor: R$22,90)</span>
+                        </div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div>
+                            <strong>BÔNUS: Protocolo de Exercícios 15min</strong><br>
+                            <span style="color: var(--gray);">Acelere resultados sem academia (GRÁTIS)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="cta-button" onclick="goToCheckout()">
+                    QUERO COMEÇAR AGORA
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                
+                <div class="security-badges">
+                    <div class="security-badge">
+                        <i class="fas fa-lock"></i>
+                        <span>Compra 100% Segura</span>
+                    </div>
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Garantia de 7 Dias</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq fade-in">
+        <div class="container">
+            <h2>Perguntas Frequentes</h2>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Preciso cortar algum alimento?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Não! Essa é a beleza do método. Você come DE TUDO, inclusive pizza, chocolate, 
+                        pão, massa... A única regra é seguir a cor predominante do dia. No fim de semana 
+                        é totalmente livre!
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Funciona para quem tem mais de 40 anos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Na verdade, funciona MELHOR! O método foi desenvolvido especificamente para 
+                        reativar o metabolismo que desacelera com a idade. Temos alunas de 35 a 67 anos 
+                        com resultados incríveis.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Quanto tempo leva para ver resultados?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        A maioria das alunas perde entre 1-2kg na PRIMEIRA SEMANA. Em 30 dias, 
+                        a média é de 5-8kg. Algumas mais dedicadas chegam a 12kg no primeiro mês.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Preciso fazer exercícios?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Não é obrigatório! O método funciona apenas com a alimentação. Mas incluímos 
+                        um protocolo opcional de apenas 15 minutos para quem quer acelerar os resultados.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        E se eu não gostar ou não funcionar?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Você tem 7 dias de garantia INCONDICIONAL. Se não gostar por qualquer motivo, 
+                        devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia. O risco é todo nosso!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section style="background: var(--gradient-primary); padding: 80px 20px; text-align: center; color: white;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+                Você Tem Duas Opções Agora...
+            </h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                    <strong>Opção 1:</strong> Continuar fazendo o que sempre fez. 
+                    Continuar gastando dinheiro com dietas que não funcionam. 
+                    Continuar se frustrando toda segunda-feira.
+                </p>
+                <p style="font-size: 1.2rem; margin-bottom: 40px;">
+                    <strong>Opção 2:</strong> Dar uma chance para o único método que 
+                    ativa TODOS os seus receptores metabólicos. Por menos que o preço 
+                    de uma pizza. Com garantia total de 7 dias.
+                </p>
+                <a href="#" class="cta-button" style="background: white; color: var(--primary);" onclick="goToCheckout()">
+                    QUERO A OPÇÃO 2 - COMEÇAR MINHA TRANSFORMAÇÃO
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Cronograma das 7 Cores. Todos os direitos reservados.</p>
+        <p style="margin-top: 10px;">
+            <a href="#">Termos de Uso</a> | 
+            <a href="#">Política de Privacidade</a> | 
+            <a href="#">Contato</a>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+            Este produto não substitui parecer médico. Resultados podem variar de pessoa para pessoa.
+        </p>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <div class="floating-whatsapp" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Live Counter -->
+    <div class="live-counter">
+        <div class="live-dot"></div>
+        <div class="live-text">
+            <span class="live-count">247</span> pessoas vendo esta página
+        </div>
+    </div>
+
+    <script>
+        let scrollTracked = false;
+        let checkoutAreaReached = false;
+        let pageLoadTime = Date.now();
+
+        // Remove loader
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Testimonial Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            const track = document.getElementById('testimonialTrack');
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Auto slide
+        setInterval(nextSlide, 5000);
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentElement;
+                const wasActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Open clicked if it wasn't active
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Live Counter Update
+        function updateLiveCounter() {
+            const counter = document.querySelector('.live-count');
+            let count = parseInt(counter.textContent);
+            const change = Math.floor(Math.random() * 11) - 5; // -5 to +5
+            count = Math.max(180, Math.min(320, count + change));
+            counter.textContent = count;
+        }
+        setInterval(updateLiveCounter, 3000);
+
+        // Spots Counter
+        function updateSpots() {
+            const spots = document.querySelector('.spots-count');
+            let count = 11;
+            setInterval(() => {
+                if (count > 3) {
+                    count--;
+                    spots.textContent = count + ' vagas';
+                }
+            }, 45000); // Decrease every 45 seconds
+        }
+        updateSpots();
+
+        // Scroll Animations
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        // CTA Functions
+        function goToCheckout() {
+              if (window.FunnelAnalytics) {
+                // Coletar informações sobre o contexto do clique
+                const scrollPosition = window.scrollY;
+                const pageHeight = document.body.scrollHeight;
+                const scrollPercentage = ((scrollPosition + window.innerHeight) / pageHeight * 100).toFixed(2);
+                
+                window.FunnelAnalytics.trackEvent('checkout_clicked', {
+                    buttonLocation: 'main_cta', // ou 'header', 'footer', etc.
+                    scrollPosition: scrollPercentage + '%',
+                    timeOnPage: Date.now() - pageLoadTime,
+                    price: 'R$ 49,90' // Preço mostrado ao usuário
+
+            
+                })
+            }
+            
+            // Replace with your checkout URL
+            setTimeout(() => {
+                window.location.href = 'https://pay.kirvano.com/c905e49a-12be-4dcd-8a53-8b312f374073';
+            }, 100);
+        }
+
+        function openWhatsApp() {
+            window.open('https://wa.me/5511954644010?text=Olá! Vi a página do Cronograma das Cores e tenho uma dúvida...', '_blank');
+        }
+
+        // Add urgency with exit intent
+        let exitIntentShown = false;
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY <= 0 && !exitIntentShown) {
+                exitIntentShown = true;
+                if (confirm('ESPERE! 🎁 Você ganhou 10% DE DESCONTO EXTRA!\n\nClique em OK para aplicar o desconto agora.')) {
+                    goToCheckout();
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            // Calcular porcentagem de scroll
+            const scrollPercentage = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
+            
+            // Quando o usuário chegar em 70% da página (onde geralmente fica o checkout)
+            if (!scrollTracked && scrollPercentage > 70) {
+                scrollTracked = true;
+                
+                if (window.FunnelAnalytics) {
+                    window.FunnelAnalytics.trackEvent('sales_page_scrolled', {
+                        scrollDepth: Math.round(scrollPercentage) + '%',
+                        timeToScroll: Date.now() - pageLoadTime,
+                        checkoutAreaReached: true
+                    });
+                }
+            }
+            
+            // Rastrear marcos de scroll (25%, 50%, 75%, 100%)
+            const milestones = [25, 50, 75, 100];
+            milestones.forEach(milestone => {
+                if (scrollPercentage >= milestone && !window[`scroll_${milestone}`]) {
+                    window[`scroll_${milestone}`] = true;
+                    
+                    if (window.FunnelAnalytics) {
+                        window.FunnelAnalytics.trackEvent(`scroll_${milestone}_percent`, {
+                            timeSpent: Date.now() - pageLoadTime
+                        });
+                    }
+                }
+            });
+        });
+
+
+
+    </script>
+</body>
+</html>

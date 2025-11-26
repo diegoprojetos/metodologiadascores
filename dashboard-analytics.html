@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analytics - Cronograma das Cores</title>
+    <meta name="description" content="Dashboard de análise e métricas do funil de vendas">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D084;
+            --primary-dark: #00A66C;
+            --secondary: #7C3AED;
+            --accent: #FF6B9D;
+            --dark: #1A1A2E;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient);
+            padding: 30px;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .date-filter {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .date-filter select {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .date-filter select option {
+            background: var(--dark);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-refresh {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-refresh:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .btn-export {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16,185,129,0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .kpi-title {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .kpi-icon.primary { background: rgba(0,208,132,0.1); color: var(--primary); }
+        .kpi-icon.secondary { background: rgba(124,58,237,0.1); color: var(--secondary); }
+        .kpi-icon.warning { background: rgba(245,158,11,0.1); color: var(--warning); }
+        .kpi-icon.danger { background: rgba(239,68,68,0.1); color: var(--danger); }
+        .kpi-icon.success { background: rgba(16,185,129,0.1); color: var(--success); }
+        .kpi-icon.accent { background: rgba(255,107,157,0.1); color: var(--accent); }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .kpi-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .kpi-change.positive {
+            color: var(--success);
+            background: rgba(16,185,129,0.1);
+        }
+
+        .kpi-change.negative {
+            color: var(--danger);
+            background: rgba(239,68,68,0.1);
+        }
+
+        /* Funnel Chart */
+        .funnel-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .funnel-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .funnel-step {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .funnel-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .funnel-bar:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.3);
+        }
+
+        .funnel-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .funnel-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .funnel-percentage {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        /* Events Table */
+        .table-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--light-gray);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        tr:hover {
+            background: rgba(102,126,234,0.05);
+        }
+
+        .event-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .event-badge.quiz { background: rgba(0,208,132,0.1); color: var(--primary); }
+        .event-badge.sales { background: rgba(124,58,237,0.1); color: var(--secondary); }
+        .event-badge.checkout { background: rgba(255,107,157,0.1); color: var(--accent); }
+
+        /* Live Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16,185,129,0.1);
+            color: var(--success);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--gray);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--light-gray);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: var(--gray);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .charts-grid { grid-template-columns: 1fr; }
+            .funnel-percentage { display: none; }
+            .table-wrapper { overflow-x: scroll; }
+        }
+
+        /* Login Screen */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .login-error {
+            color: var(--danger);
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h2 class="login-title">Dashboard Analytics</h2>
+            <p style="color: var(--gray); margin-bottom: 20px;">Acesso restrito ao administrador</p>
+            <input type="password" class="login-input" id="passwordInput" placeholder="Digite a senha de acesso" autofocus>
+            <button class="login-button" onclick="login()">
+                <i class="fas fa-lock"></i> Acessar Dashboard
+            </button>
+            <p class="login-error" id="loginError">Senha incorreta! Tente novamente.</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1><i class="fas fa-chart-line"></i> Dashboard Analytics</h1>
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    Atualização em tempo real
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="date-filter">
+                    <i class="fas fa-calendar"></i>
+                    <select id="dateFilter">
+                        <option value="today">Hoje</option>
+                        <option value="yesterday">Ontem</option>
+                        <option value="week" selected>Últimos 7 dias</option>
+                        <option value="month">Últimos 30 dias</option>
+                        <option value="all">Todo período</option>
+                    </select>
+                </div>
+                <button class="btn btn-refresh" onclick="refreshData()">
+                    <i class="fas fa-sync"></i> Atualizar
+                </button>
+                <button class="btn btn-export" onclick="exportData()">
+                    <i class="fas fa-download"></i> Exportar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Acessos ao Quiz</span>
+                    <div class="kpi-icon primary">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                </div>
+                <div class="kpi-value" id="kpiQuizLoaded">0</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+12% vs ontem</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Quiz Finalizados</span>
+                    <div class="kpi-icon secondary">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="kpi-value" id="kpiQuizCompleted">0</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+8% vs ontem</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Visualizações Vendas</span>
+                    <div class="kpi-icon warning">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                </div>
+                <div class="kpi-value" id="kpiSalesViews">0</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+15% vs ontem</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Scroll até Checkout</span>
+                    <div class="kpi-icon success">
+                        <i class="fas fa-mouse"></i>
+                    </div>
+                </div>
+                <div class="kpi-value" id="kpiScrolled">0</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+5% vs ontem</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Cliques Checkout</span>
+                    <div class="kpi-icon accent">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+                <div class="kpi-value" id="kpiCheckout">0</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+20% vs ontem</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Taxa de Conversão</span>
+                    <div class="kpi-icon danger">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                </div>
+                <div class="kpi-value" id="kpiConversion">0%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+2.3% vs ontem</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funnel Visualization -->
+        <div class="funnel-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-filter"></i> Funil de Conversão
+                </h2>
+                <span style="color: var(--gray);">Taxa de conversão total: <strong id="overallRate">0%</strong></span>
+            </div>
+            <div class="funnel-container" id="funnelContainer">
+                <!-- Funnel steps will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3 class="chart-title">
+                    <i class="fas fa-chart-line"></i> Evolução Diária
+                </h3>
+                <canvas id="dailyChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">
+                    <i class="fas fa-chart-pie"></i> Distribuição de Eventos
+                </h3>
+                <canvas id="eventsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Events Table -->
+        <div class="table-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-list"></i> Últimos Eventos
+                </h2>
+                <button class="btn btn-refresh" onclick="loadMoreEvents()">
+                    Ver mais
+                </button>
+            </div>
+            <div class="table-wrapper">
+                <table id="eventsTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Evento</th>
+                            <th>Página</th>
+                            <th>Sessão</th>
+                            <th>Detalhes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eventsTableBody">
+                        <!-- Events will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Analytics Script -->
+    <script src="analytics.js"></script>
+    
+    <script>
+        // Configuration
+        const ADMIN_PASSWORD = 'admin123'; // Change this to your secure password
+        let isAuthenticated = false;
+        let analyticsData = null;
+        let charts = {};
+
+        // Login Function
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === ADMIN_PASSWORD) {
+                isAuthenticated = true;
+                document.getElementById('loginOverlay').style.display = 'none';
+                initDashboard();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        // Enter key to login
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+
+        // Initialize Dashboard
+        function initDashboard() {
+            loadAnalyticsData();
+            setInterval(loadAnalyticsData, 5000); // Auto-refresh every 5 seconds
+        }
+
+        // Load Analytics Data
+        function loadAnalyticsData() {
+            if (window.FunnelAnalytics) {
+                analyticsData = window.FunnelAnalytics.getAnalytics();
+                updateKPIs();
+                updateFunnel();
+                updateCharts();
+                updateEventsTable();
+            }
+        }
+
+        // Update KPIs
+        function updateKPIs() {
+            const metrics = analyticsData.funnelMetrics;
+            
+            document.getElementById('kpiQuizLoaded').textContent = formatNumber(metrics.quiz_loaded);
+            document.getElementById('kpiQuizCompleted').textContent = formatNumber(metrics.quiz_completed);
+            document.getElementById('kpiSalesViews').textContent = formatNumber(metrics.sales_page_loaded);
+            document.getElementById('kpiScrolled').textContent = formatNumber(metrics.sales_page_scrolled);
+            document.getElementById('kpiCheckout').textContent = formatNumber(metrics.checkout_clicked);
+            
+            const conversionRate = analyticsData.conversionRates.overallConversionRate || '0';
+            document.getElementById('kpiConversion').textContent = conversionRate + '%';
+            document.getElementById('overallRate').textContent = conversionRate + '%';
+        }
+
+        // Update Funnel
+        function updateFunnel() {
+            const funnelContainer = document.getElementById('funnelContainer');
+            const metrics = analyticsData.funnelMetrics;
+            
+            const steps = [
+                { label: 'Acessaram o Quiz', value: metrics.quiz_loaded, color: '#00D084' },
+                { label: 'Iniciaram o Quiz', value: metrics.quiz_started, color: '#52C7A4' },
+                { label: 'Finalizaram o Quiz', value: metrics.quiz_completed, color: '#7C3AED' },
+                { label: 'Viram Página de Vendas', value: metrics.sales_page_loaded, color: '#FF6B9D' },
+                { label: 'Scrollaram até Checkout', value: metrics.sales_page_scrolled, color: '#F59E0B' },
+                { label: 'Clicaram no Checkout', value: metrics.checkout_clicked, color: '#EF4444' }
+            ];
+            
+            let html = '';
+            const maxValue = Math.max(...steps.map(s => s.value), 1);
+            
+            steps.forEach((step, index) => {
+                const width = (step.value / maxValue * 100) || 0;
+                const percentage = index > 0 && steps[index - 1].value > 0 
+                    ? ((step.value / steps[index - 1].value) * 100).toFixed(1) 
+                    : '100';
+                
+                html += `
+                    <div class="funnel-step">
+                        <div class="funnel-bar" style="width: ${width}%; background: ${step.color};">
+                            <span class="funnel-label">${step.label}</span>
+                            <span class="funnel-value">${step.value}</span>
+                        </div>
+                        ${index > 0 ? `<span class="funnel-percentage">${percentage}%</span>` : ''}
+                    </div>
+                `;
+            });
+            
+            funnelContainer.innerHTML = html;
+        }
+
+        // Update Charts
+        function updateCharts() {
+            // Daily Chart
+            const ctx1 = document.getElementById('dailyChart').getContext('2d');
+            
+            const dailyData = prepareDailyData();
+            
+            if (charts.daily) {
+                charts.daily.destroy();
+            }
+            
+            charts.daily = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: dailyData.labels,
+                    datasets: [{
+                        label: 'Quiz Acessos',
+                        data: dailyData.quizLoads,
+                        borderColor: '#00D084',
+                        tension: 0.4
+                    }, {
+                        label: 'Checkouts',
+                        data: dailyData.checkouts,
+                        borderColor: '#FF6B9D',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Events Chart
+            const ctx2 = document.getElementById('eventsChart').getContext('2d');
+            
+            if (charts.events) {
+                charts.events.destroy();
+            }
+            
+            charts.events = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Quiz', 'Página de Vendas', 'Checkout', 'Outros'],
+                    datasets: [{
+                        data: [
+                            analyticsData.funnelMetrics.quiz_loaded,
+                            analyticsData.funnelMetrics.sales_page_loaded,
+                            analyticsData.funnelMetrics.checkout_clicked,
+                            10
+                        ],
+                        backgroundColor: ['#00D084', '#7C3AED', '#FF6B9D', '#F3F4F6']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Prepare Daily Data
+        function prepareDailyData() {
+            const last7Days = [];
+            const quizLoads = [];
+            const checkouts = [];
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                last7Days.push(dateStr.split('-')[2] + '/' + dateStr.split('-')[1]);
+                
+                const dayData = analyticsData.dailyStats[dateStr];
+                quizLoads.push(dayData ? (dayData.events.quiz_loaded || 0) : 0);
+                checkouts.push(dayData ? (dayData.events.checkout_clicked || 0) : 0);
+            }
+            
+            return {
+                labels: last7Days,
+                quizLoads,
+                checkouts
+            };
+        }
+
+        // Update Events Table
+        function updateEventsTable() {
+            const tbody = document.getElementById('eventsTableBody');
+            const events = analyticsData.events.slice(-10).reverse();
+            
+            let html = '';
+            events.forEach(event => {
+                const badge = getBadgeClass(event.event);
+                html += `
+                    <tr>
+                        <td>${formatDate(event.timestamp)}</td>
+                        <td><span class="event-badge ${badge}">${formatEventName(event.event)}</span></td>
+                        <td>${event.page}</td>
+                        <td>${event.sessionId.slice(-8)}</td>
+                        <td>${JSON.stringify(event.data).slice(0, 50)}...</td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html || '<tr><td colspan="5" style="text-align: center; color: var(--gray);">Nenhum evento registrado</td></tr>';
+        }
+
+        // Helper Functions
+        function formatNumber(num) {
+            return num.toLocaleString('pt-BR');
+        }
+
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('pt-BR');
+        }
+
+        function formatEventName(event) {
+            const names = {
+                'quiz_loaded': 'Quiz Carregado',
+                'quiz_started': 'Quiz Iniciado',
+                'quiz_completed': 'Quiz Finalizado',
+                'sales_page_loaded': 'Página de Vendas',
+                'sales_page_scrolled': 'Scroll Checkout',
+                'checkout_clicked': 'Checkout Clicado'
+            };
+            return names[event] || event;
+        }
+
+        function getBadgeClass(event) {
+            if (event.includes('quiz')) return 'quiz';
+            if (event.includes('sales')) return 'sales';
+            if (event.includes('checkout')) return 'checkout';
+            return '';
+        }
+
+        // Refresh Data
+        function refreshData() {
+            loadAnalyticsData();
+            // Add spinning animation to refresh button
+            const btn = document.querySelector('.btn-refresh');
+            btn.querySelector('i').style.animation = 'spin 1s';
+            setTimeout(() => {
+                btn.querySelector('i').style.animation = '';
+            }, 1000);
+        }
+
+        // Export Data
+        function exportData() {
+            const dataStr = JSON.stringify(analyticsData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `analytics_${new Date().toISOString()}.json`;
+            a.click();
+        }
+
+        // Load More Events
+        function loadMoreEvents() {
+            alert('Funcionalidade em desenvolvimento');
+        }
+
+        // Date Filter Change
+        document.getElementById('dateFilter').addEventListener('change', function() {
+            // Implement date filtering logic here
+            refreshData();
+        });
+    </script>
+</body>
+</html>
